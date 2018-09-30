@@ -59,6 +59,7 @@ difference=$(${diff_tool} -y -W40 ${actual_output} ${expected_output})
 if [ $? -ne 0 ]; then
   echo -e "${RED}Tests failed!${NC}"
   echo ${difference}
+  exit 1
 else
   echo "Tests passed!"
 fi
