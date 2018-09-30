@@ -49,7 +49,13 @@ echo "-------------------------------"
 
 RED='\033[0;31m'
 NC='\033[0m'
-difference=$(colordiff -y -W40 ${actual_output} ${expected_output})
+
+diff_tool="colordiff"
+if [ -z $(command -v ${diff_tool}) ]; then
+  diff_tool="diff"
+fi
+
+difference=$(${diff_tool} -y -W40 ${actual_output} ${expected_output})
 if [ $? -ne 0 ]; then
   echo -e "${RED}Tests failed!${NC}"
   echo ${difference}
